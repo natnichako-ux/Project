@@ -7,25 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- container หลักสำหรับหน้า UI และหน้า map -->
-    <div class="container">
-        <!-- หน้าจอ UI เริ่มต้น -->
-        <section id="ui-screen" class="screen active">
-            <h1>ยินดีต้อนรับสู่ WebMap</h1>
-            <p>กดปุ่มด้านล่างเพื่อไปยังหน้าแผนที่ โดยยังอยู่ที่ URL เดิม</p>
-            <button id="goto-map">GoToMap</button>
-        </section>
 
-        <!-- หน้าจอแผนที่แยกเป็นไฟล์ map-screen.html -->
-        <section id="map-screen" class="screen">
-            <div class="toolbar">
-                <button id="back-button">กลับหน้า UI</button>
-            </div>
-            <iframe id="map-frame" src="" title="WebMap"></iframe>
-        </section>
-    </div>
+<div class="container">
 
-    <!-- โหลดสคริปต์ JavaScript สำหรับการสลับหน้า -->
-    <script src="project.js"></script>
+    <!-- หน้า UI -->
+    <section id="ui-screen" class="screen active">
+        <div class="card">
+            <h1>🌍 WebMap</h1>
+            <p>เข้าสู่ระบบแผนที่แบบอินเตอร์แอคทีฟ</p>
+            <button id="goto-map" class="primary-btn">
+                🚀 ไปที่แผนที่
+            </button>
+        </div>
+    </section>
+
+    <!-- หน้า Map -->
+    <section id="map-screen" class="screen">
+        <div class="map-header">
+            <h2>📍 แผนที่</h2>
+            <button id="back-button" class="secondary-btn">← กลับ</button>
+        </div>
+
+        <iframe id="map-frame" src="map-screen.html"></iframe>
+    </section>
+
+</div>
+
+<script src="project.js"></script>
 </body>
 </html>
