@@ -1,0 +1,80 @@
+/* style.css
+   สไตล์หลักสำหรับหน้า UI และ iframe ของ WebMap */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6fb;
+  color: #222;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.screen.active {
+  display: block;
+}
+
+#ui-screen {
+  padding: 40px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  text-align: center;
+}
+
+#ui-screen h1 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+#ui-screen p {
+  margin: 16px auto 32px;
+  max-width: 680px;
+  line-height: 1.6;
+  color: #4a4a4a;
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 28px;
+  background: #2f80ed;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #1c62d0;
+}
+
+.toolbar {
+  margin-bottom: 12px;
+}
+
+iframe {
+  width: 100%;
+  min-height: 80vh;
+  border: 1px solid #d7d8df;
+  border-radius: 16px;
+}

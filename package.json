@@ -1,0 +1,12 @@
+{
+  "name": "webmap-ui",
+  "version": "1.0.0",
+  "description": "UI page with GoToMap button and Node web server.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
