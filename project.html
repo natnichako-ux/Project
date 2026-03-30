@@ -3,36 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMap UI</title>
+    <title>WebMap UI - Internship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-
-    <!-- หน้า UI -->
     <section id="ui-screen" class="screen active">
-        <div class="card">
-            <h1>🌍 WebMap</h1>
-            <p>เข้าสู่ระบบแผนที่แบบอินเตอร์แอคทีฟ</p>
-            <button id="goto-map" class="primary-btn">
-                🚀 ไปที่แผนที่
-            </button>
+        
+        <header class="hero-section">
+            <div class="hamburger-menu">≡</div>
+            <div class="site-title">Web Name</div>
+            <p style="font-size: 12px; margin-bottom: 5px;">เว็บสถานที่ฝึกงานจร้า</p>
+            <h1 class="hero-title">Internship</h1>
+            <p class="hero-subtitle">แนะนำสายที่สนใจ</p>
+            
+            <div class="nav-circles">
+                <a href="#sec-gis" class="circle-btn"><span>🌍</span> GIS</a>
+                <a href="#sec-rs" class="circle-btn"><span>🛰️</span> RS</a>
+                <a href="#sec-survay" class="circle-btn"><span>🔭</span> SURVAY</a>
+                <a href="#sec-dev" class="circle-btn"><span>💻</span> DEV</a>
+            </div>
+        </header>
+
+        <div class="map-callout-container">
+            <div class="map-callout-box map-embedded">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.590151811654!2d100.5364431148303!3d13.743128990352932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29ed37149c41f%3A0x6d9f381f26e3c545!2sSiam%20Paragon!5e0!3m2!1sen!2sth!4v1680000000000!5m2!1sen!2sth" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                
+                <button id="goto-map" class="primary-btn map-overlay-btn">ขยายแผนที่เต็มจอ</button>
+            </div>
         </div>
+
+        <section id="sec-gis" class="category-section">
+            <h2 class="category-title">GIS</h2>
+            <div class="gallery-container">
+                <div class="gallery-item">4</div>
+                <div class="gallery-item">2</div>
+                <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');">1</div>
+                <div class="gallery-item">3</div>
+                <div class="gallery-item">5</div>
+            </div>
+            <p class="category-desc">สถานที่แนะนำสาย GIS</p>
+        </section>
+
+        <section id="sec-rs" class="category-section">
+            <h2 class="category-title">RS</h2>
+            <div class="gallery-container">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+            <p class="category-desc">สถานที่แนะนำสาย RS</p>
+        </section>
+
+        <section id="sec-survay" class="category-section">
+            <h2 class="category-title">SURVAY</h2>
+            <div class="gallery-container">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+            <p class="category-desc">สถานที่แนะนำสาย SURVAY</p>
+        </section>
+
+        <section id="sec-dev" class="category-section">
+            <h2 class="category-title">DEV</h2>
+            <div class="gallery-container">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+            <p class="category-desc">สถานที่แนะนำสาย DEV</p>
+        </section>
+
+        <footer class="site-footer"></footer>
+
     </section>
 
-    <!-- หน้า Map -->
     <section id="map-screen" class="screen">
         <div class="map-header">
-            <h2>📍 แผนที่</h2>
-            <button id="back-button" class="secondary-btn">← กลับ</button>
+            <h2>📍 แผนที่ Interactive</h2>
+            <button id="back-button" class="secondary-btn">← กลับไปหน้าหลัก</button>
         </div>
-
         <iframe id="map-frame" src="map-screen.html"></iframe>
     </section>
 
-</div>
+    <script>
+        const uiScreen = document.getElementById('ui-screen');
+        const mapScreen = document.getElementById('map-screen');
+        const gotoMapBtn = document.getElementById('goto-map');
+        const backBtn = document.getElementById('back-button');
 
-<script src="project.js"></script>
+        gotoMapBtn.addEventListener('click', () => {
+            uiScreen.classList.remove('active');
+            mapScreen.classList.add('active');
+            window.scrollTo(0, 0); 
+        });
+
+        backBtn.addEventListener('click', () => {
+            mapScreen.classList.remove('active');
+            uiScreen.classList.add('active');
+        });
+    </script>
 </body>
 </html>

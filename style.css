@@ -5,85 +5,236 @@
     font-family: "Prompt", sans-serif;
 }
 
+/* เพิ่มให้เวลาลิงก์ไปตาม id แล้วเลื่อนแบบนุ่มนวล */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-    height: 100vh;
+    background-color: #f4f5f7;
+    color: #333;
 }
 
-.container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-/* Screen */
+/* --- ระบบสลับหน้าเว็บ --- */
 .screen {
-    position: absolute;
-    width: 100%;
-    height: 100%;
     display: none;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    min-height: 100vh;
 }
-
 .screen.active {
-    display: flex;
+    display: block;
 }
 
-/* Card UI */
-.card {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
+/* =========================================
+   ส่วน UI Screen (หน้าหลัก)
+   ========================================= */
+
+/* 1. Header Section (ส่วนบนสุด) */
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+    padding: 40px 20px 80px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    color: white;
+    position: relative;
+    margin-bottom: 60px; /* เพิ่มระยะห่างด้านล่างเผื่อวงกลมที่ใหญ่ขึ้น */
 }
 
-.card h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
+.hamburger-menu {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    cursor: pointer;
 }
 
-.card p {
+.site-title {
+    background: white;
+    color: black;
+    display: inline-block;
+    padding: 10px 40px;
+    border-radius: 50px;
+    font-size: 24px;
+    font-weight: 600;
     margin-bottom: 20px;
-    color: #555;
 }
 
-/* Buttons */
+.hero-title {
+    font-size: 48px;
+    font-style: italic;
+    font-weight: bold;
+    color: #4da6ff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* ปุ่มวงกลม 4 หมวดหมู่ (ปรับขนาดให้ใหญ่ขึ้น) */
+.nav-circles {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* เพิ่มระยะห่างระหว่างปุ่ม */
+    margin-top: 20px;
+    position: absolute;
+    bottom: -50px; /* ปรับให้ขยับลงตามขนาดปุ่ม */
+    width: 100%;
+    left: 0;
+}
+
+.circle-btn {
+    width: 100px;  /* ขยายขนาด */
+    height: 100px; /* ขยายขนาด */
+    background: #111;
+    border: 3px solid white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px; /* ขยายขนาดตัวหนังสือ */
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-decoration: none; /* ซ่อนเส้นใต้ของแท็ก a */
+}
+
+.circle-btn:hover {
+    transform: translateY(-5px);
+    background: #4da6ff;
+}
+
+.circle-btn span { 
+    font-size: 32px; /* ขยายขนาดไอคอน */
+    margin-bottom: 5px; 
+}
+
+/* 2. Map Callout Section (กรอบที่บอกว่าอยากให้เป็นแมพ) */
+.map-callout-container {
+    margin: 40px auto;
+    width: 80%;
+    max-width: 800px;
+}
+
+.map-callout-box {
+    background: white;
+    border: 3px solid #111;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* คลาสใหม่ จัดการกรอบแผนที่ */
+.map-callout-box.map-embedded {
+    padding: 0; /* เอาขอบด้านในออกเพื่อให้แผนที่เต็มกรอบ */
+    height: 350px; /* กำหนดความสูงของแผนที่ */
+    position: relative;
+    overflow: hidden;
+    display: block; /* เปลี่ยนจาก flex เป็น block เพื่อให้ iframe ทำงานได้ดีขึ้น */
+}
+
+/* ปุ่มที่ลอยอยู่บนแผนที่ */
+.map-overlay-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
 .primary-btn {
-    background: #4facfe;
+    background: #0066cc;
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 10px;
+    padding: 10px 25px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
     transition: 0.3s;
 }
+.primary-btn:hover { background: #004c99; }
 
-.primary-btn:hover {
-    background: #007bff;
-    transform: scale(1.05);
+/* 3. Content Sections (GIS, RS, SURVAY, DEV) */
+.category-section {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto 50px;
+    text-align: center;
+    padding-top: 20px; /* เพิ่มพื้นที่ด้านบนเล็กน้อยเพื่อให้เวลาเลื่อนลงมาแล้วไม่ชิดขอบบนเกินไป */
 }
 
-.secondary-btn {
-    background: #fff;
-    border: 2px solid #4facfe;
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
+.category-title {
+    font-size: 20px;
+    margin-bottom: 15px;
 }
 
-.secondary-btn:hover {
-    background: #4facfe;
+/* เอฟเฟกต์ภาพขยาย (Accordion Flexbox) */
+.gallery-container {
+    display: flex;
+    height: 200px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.gallery-item {
+    background-color: #222;
     color: white;
+    border-radius: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Map Screen */
-#map-screen {
-    flex-direction: column;
+/* ตั้งค่าขนาดเริ่มต้นให้ไม่เท่ากันแบบในรูป */
+.gallery-item:nth-child(1), .gallery-item:nth-child(5) { flex: 1; height: 140px; }
+.gallery-item:nth-child(2), .gallery-item:nth-child(4) { flex: 1.5; height: 170px; }
+.gallery-item:nth-child(3) { flex: 2.5; height: 200px; background-color: #111; }
+
+/* เอฟเฟกต์เมื่อ Hover ที่ Container ให้ทุกตัวหด */
+.gallery-container:hover .gallery-item {
+    flex: 1;
+    height: 140px;
+}
+/* เอฟเฟกต์เมื่อ Hover ที่ตัวมันเอง ให้ตัวนั้นขยายใหญ่สุด */
+.gallery-container .gallery-item:hover {
+    flex: 4;
+    height: 200px;
+    background-color: #4da6ff;
 }
 
+.category-desc {
+    font-size: 14px;
+    color: #666;
+    word-break: break-all;
+}
+
+/* 4. Footer */
+.site-footer {
+    background: #00004d;
+    height: 60px;
+    width: 100%;
+    margin-top: 50px;
+}
+
+/* =========================================
+   ส่วน Map Screen (หน้าที่ถูกซ่อนอยู่)
+   ========================================= */
 .map-header {
     width: 100%;
     padding: 15px 20px;
@@ -94,8 +245,17 @@ body {
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
+.secondary-btn {
+    background: #fff;
+    border: 2px solid #0066cc;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
 #map-frame {
     width: 100%;
-    height: calc(100% - 60px);
+    height: calc(100vh - 60px);
     border: none;
+    display: block;
 }
